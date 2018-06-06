@@ -1,6 +1,7 @@
 const express = require('express');
 const uuidv4 = require('uuid/v4');
 const priceTable = require('../lib/rxnorm-prices.json');
+const winston = require('winston')
 
 const router = express.Router();
 
@@ -23,12 +24,18 @@ function getValidCodingFromConcept(medicationCodeableConcept) {
 }
 
 function getValidResource(resource, context) {
-  let coding = null;
-  if (resource.resourceType === 'MedicationOrder' || resource.resourceType === 'MedicationRequest') {
+    let coding = null;
+
+    winston.log('info', 'getValidResource entry' );
+
+    if (resource.resourceType === 'MedicationOrder' || resource.resourceType === 'MedicationRequest') {
     // Check if patient in reference from medication resource refers to patient in context
     if (resource.patient && resource.patient.reference === `Patient/${context.patientId}`) {
-      const { medicationCodeableConcept } = resource;
-      coding = getValidCodingFromConcept(medicationCodeableConcept);
+	const { medicationCodeableConcept } = resource;
+
+	winston.log('info', 'getValidResource innerblock', {medicationCodeableConcept} );
+
+	coding = getValidCodingFromConcept(medicationCodeableConcept);
     }
   }
   return coding;
@@ -37,8 +44,14 @@ function getValidResource(resource, context) {
 function getValidContextResources(request) {
   const resources = [];
   const { context } = request.body;
+
+  winston.log('info', 'getValidContextResources entry');
+    
   if (context && context.patientId && context.medications) {
-    const medResources = context.medications;
+      const medResources = context.medications;
+
+      winston.log('info', 'getValidContextResources medResources', {medResources});
+      
     medResources.forEach((resource) => {
       const isValidResource = getValidResource(resource, context);
       if (isValidResource) {
@@ -46,6 +59,8 @@ function getValidContextResources(request) {
       }
     });
   }
+
+  winston.log('info', 'getValidContextResources exit', {resources});
   return resources;
 }
 
@@ -152,9 +167,12 @@ function buildCards(resources) {
 
 // CDS Service endpoint
 router.post('/', (request, response) => {
-  const validResources = getValidContextResources(request);
-  const cards = buildCards(validResources);
-  response.json(cards);
+    winston.log('info', 'a');
+    const validResources = getValidContextResources(request);
+    winston.log('info', 'b');
+    const cards = buildCards(validResources);
+    winston.log('info', 'c');
+    response.json(cards);
 });
 
 // Analytics endpoint

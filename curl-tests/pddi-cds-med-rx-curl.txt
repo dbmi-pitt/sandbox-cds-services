@@ -7,50 +7,98 @@ curl -0 -v -X POST http://localhost:3000/cds-services/pddi-cds-med-rx  -H 'Conte
   "patient": "SMART-1288992",
   "context": {
     "patientId": "SMART-1288992",
-    "medications": [{
-      "resourceType": "MedicationOrder",
-      "dateWritten": "2018-06-06",
-      "status": "draft",
-      "patient": {
-        "reference": "Patient/SMART-1288992"
-      },
-      "dosageInstruction": [
-        {
-          "doseQuantity": {
-            "value": 1,
-            "system": "http://unitsofmeasure.org",
-            "code": "{pill}"
+    "medications": [
+      {
+        "resource": {
+          "resourceType": "MedicationOrder",
+          "dateWritten": "2018-06-11",
+          "status": "draft",
+          "patient": {
+            "reference": "Patient/SMART-1288992"
           },
-          "timing": {
-            "repeat": {
-              "frequency": 1,
-              "period": 1,
-              "periodUnits": "d"
+          "dosageInstruction": [
+            {
+              "doseQuantity": {
+                "value": 1,
+                "system": "http://unitsofmeasure.org",
+                "code": "{TODO}"
+              },
+              "timing": {
+                "repeat": {
+                  "frequency": 1,
+                  "period": 30,
+                  "periodUnits": "d"
+                }
+              }
             }
+          ],
+          "medicationCodeableConcept": {
+            "text": "Diclofenac Sodium 0.01 MG/MG Topical Gel",
+            "coding": [
+              {
+                "display": "Diclofenac Sodium 0.01 MG/MG Topical Gel",
+                "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                "code": "855633"
+              }
+            ]
+          },
+          "reasonCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "396275006",
+                "display": "Osteoarthritis"
+              }
+            ],
+            "text": "Osteoarthritis"
           }
         }
-      ],
-      "medicationCodeableConcept": {
-        "text": "Warfarin Sodium 1 MG Oral Tablet [Coumadin]",
-        "coding": [
-          {
-            "display": "Warfarin Sodium 1 MG Oral Tablet [Coumadin]",
-            "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
-            "code": "855290"
-          }
-        ]
       },
-      "reasonCodeableConcept": {
-        "coding": [
+      {
+        "resourceType": "MedicationOrder",
+        "dateWritten": "2018-06-06",
+        "status": "draft",
+        "patient": {
+          "reference": "Patient/SMART-1288992"
+        },
+        "dosageInstruction": [
           {
-            "system": "http://snomed.info/sct",
-            "code": "26929004",
-            "display": "Alzheimers disease"
+            "doseQuantity": {
+              "value": 1,
+              "system": "http://unitsofmeasure.org",
+              "code": "{pill}"
+            },
+            "timing": {
+              "repeat": {
+                "frequency": 1,
+                "period": 30,
+                "periodUnits": "d"
+              }
+            }
           }
         ],
-        "text": "Alzheimers disease"
+        "medicationCodeableConcept": {
+          "text": "Warfarin Sodium 1 MG Oral Tablet [Coumadin]",
+          "coding": [
+            {
+              "display": "Warfarin Sodium 1 MG Oral Tablet [Coumadin]",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+              "code": "855290"
+            }
+          ]
+        },
+        "reasonCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "26929004",
+              "display": "Alzheimers disease"
+            }
+          ],
+          "text": "Alzheimers disease"
+        }
       }
-    }]
+    ]
   },
   "fhirAuthorization": {
     "access_token": "eyJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0ODE2M2M1ZS04OGI1LTRjYjMtOTJkMy0yM2I4MDBjYWE5MjciLCJpc3MiOiJodHRwczpcL1wvYXV0aC5oc3Bjb25zb3J0aXVtLm9yZ1wvIiwiaWF0IjoxNTI4MzE2MDk0LCJqdGkiOiJiYjllMGZhNy0wM2Y5LTQ4YzAtOTdkZS1hMGY0MTMyNzAyOTgifQ.ZlTr1IbgGEnUh69qH3-VZNKAs8r7RvfeunVHN6UcTNuaC9zks1Mtv9uApUVo9C_Vgf8LNXZHYXBRYjTh3uA8EgjmEU-8HUpmr3UWswLjZMagdD1PxE9zn2KoiYc4UVnGqR9p6AG89c4caKlOqatDqs5Oq3DEOjao8qJjgpfqMkXCt1cY_4B3fIZj1PZaa8-V-VxgaZt8--ayJq5_y19NFj3dpJISCDIfXC13GAE3_kbSAruIc5Ns1Z6RTbBizAAi6X0OL-DFXo0yaJ3n7Qo8gSB8-2YQzVh29iATFfRgCiBS_JXG9ZAGV1VHCZPruQb69CEHwmeCIMxnQNvGtasNBA",

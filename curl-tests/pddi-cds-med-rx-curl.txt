@@ -9,7 +9,6 @@ curl -0 -v -X POST http://localhost:3000/cds-services/pddi-cds-med-rx  -H 'Conte
     "patientId": "SMART-1288992",
     "medications": [
       {
-        "resource": {
           "resourceType": "MedicationOrder",
           "dateWritten": "2018-06-11",
           "status": "draft",
@@ -52,7 +51,6 @@ curl -0 -v -X POST http://localhost:3000/cds-services/pddi-cds-med-rx  -H 'Conte
             ],
             "text": "Osteoarthritis"
           }
-        }
       },
       {
         "resourceType": "MedicationOrder",

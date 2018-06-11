@@ -1,7 +1,16 @@
+// general libaries
 const express = require('express');
 const uuidv4 = require('uuid/v4');
+const winston = require('winston');
+
+// libs provided by this service
+const warfarinNsaids = require('../lib/pddi-cds/warfarin-nsaids-CDS')
+
+const pddiValueSets = require('../lib/pddi-cds-valuesets.json');
+
+// deprecated - TODO remove related code
 const priceTable = require('../lib/rxnorm-prices.json');
-const winston = require('winston')
+
 
 const router = express.Router();
 
@@ -26,19 +35,20 @@ function getValidCodingFromConcept(medicationCodeableConcept) {
 function getValidResource(resource, context) {
     let coding = null;
 
-    winston.log('info', 'getValidResource entry' );
+    winston.log('info', 'getValidResource entry', {resource});
 
     if (resource.resourceType === 'MedicationOrder' || resource.resourceType === 'MedicationRequest') {
-    // Check if patient in reference from medication resource refers to patient in context
-    if (resource.patient && resource.patient.reference === `Patient/${context.patientId}`) {
-	const { medicationCodeableConcept } = resource;
+	// Check if patient in reference from medication resource refers to patient in context
+	if (resource.patient && resource.patient.reference === `Patient/${context.patientId}`) {
+	    const { medicationCodeableConcept } = resource;
 
-	winston.log('info', 'getValidResource innerblock', {medicationCodeableConcept} );
+	    winston.log('info', 'getValidResource innerblock', {medicationCodeableConcept} );
 
-	coding = getValidCodingFromConcept(medicationCodeableConcept);
+	    coding = getValidCodingFromConcept(medicationCodeableConcept);
+	}
+	winston.log('error', 'getValidResource - resource.patient.reference does not equal Patient/${context.patientId}');
     }
-  }
-  return coding;
+    return coding;
 }
 
 function getValidContextResources(request) {
@@ -49,10 +59,10 @@ function getValidContextResources(request) {
     
   if (context && context.patientId && context.medications) {
       const medResources = context.medications;
-
+      
       winston.log('info', 'getValidContextResources medResources', {medResources});
       
-    medResources.forEach((resource) => {
+      medResources.forEach((resource) => {
       const isValidResource = getValidResource(resource, context);
       if (isValidResource) {
         resources.push(resource);
@@ -67,13 +77,13 @@ function getValidContextResources(request) {
 function constructCard(summary, suggestionResource) {
   const card = {
     summary,
-    source: { label: 'CMS Public Use Files' },
+    source: { label: 'Potential Drug-drug interaction CDS' },
     indicator: 'info',
   };
 
   if (suggestionResource) {
     card.suggestions = [{
-      label: 'Change to generic',
+      label: 'No special precautions - Not likely to increase risk of upper GI bleeding.',
       uuid: uuidv4(),
       actions: [
         {
@@ -124,54 +134,109 @@ function getCostCard(brandCode, genericCode, prices, currentResource) {
   return potentialSuggestionCard || constructCard(`Cost: $${Math.round(medPrice * 100) / 100}`);
 }
 
-function getCardForResponse(resource) {
-  const currentResource = resource;
-  const codings = resource.medicationCodeableConcept.coding;
-  const coding = getValidCoding(codings, 'http://www.nlm.nih.gov/research/umls/rxnorm');
-  const currentMedCode = coding.code;
+function getCardForCdsState(cdsState, validResources) {
+    winston.log('info', 'getCardForCdsState entry');
+    // TODO: process the validResources as needed to create actions
 
-  let brandCode;
-  let genericCode = priceTable.brandToGeneric[currentMedCode];
-  if (genericCode) {
-    brandCode = currentMedCode;
-  } else {
-    // current code in the resource is possibly already a generic
-    genericCode = currentMedCode;
-  }
+    // just a suggestion card?
+    if (cdsState.ruleBranchRecommendedAction === `No special precautions`){
+	winston.log('info', 'creating simple suggestion card');
+	
+	const card = {
+	    summary : `${cdsState.rule} triggered for warfarin (RxCUI ${cdsState.drugPair.warfarin}) and NSAID (RxCUI ${cdsState.drugPair.nsaid}) with context ${cdsState.ruleBranch}`,
+	    source: { label: 'Potential Drug-drug interaction CDS'},
+	    indicator: 'info'
+	};
+	card.suggestions = [{
+	    label: `No special precautions. Evidence: ${cdsState.evidence}`
+	}];
+	
+	return card;
+    };
 
-  const prices = priceTable.ingredientsToPrices[priceTable.genericToIngredients[genericCode]];
-
-  if (!prices) {
     return null;
-  }
-
-  return getCostCard(brandCode, genericCode, prices, currentResource);
 }
 
-function buildCards(resources) {
-  if (!resources.length) {
-    return { cards: [] };
-  }
-  const cards = [];
-  resources.forEach((resource) => {
-    const suggestedCard = getCardForResponse(resource);
-    if (suggestedCard) {
-      cards.push(suggestedCard);
+function pddiCDS(resources) {
+    winston.log('info', 'pddiCDS Entry');
+
+    const cdsStateL = [];
+    if (!resources.length) {
+	winston.log('error', 'no resources to process!');
+	return { cdsStateL: []};
     }
-  });
-  if (!cards.length) {
-    return { cards: [] };
-  }
-  return { cards };
+
+    cdsStateInit = {'rule':null,
+		    'drugPair':null,
+		    'ruleBranch':null,
+		    'ruleBranchRecommendedAction':null,
+		    'evidence':null,
+		    'mechanism':null,
+		    'clinicalConsequences':null,
+		    'seriousness':null,
+		    'severity':null,
+		    'generalRecommendedAction':null,
+		    'freqExposure':null,
+		    'freqHarmInExposed':null
+		   };
+    
+    
+    drugPair = warfarinNsaids.ruleAppliesToContext(resources);
+    if (drugPair) {
+	cdsStateInit.rule = 'Warfarin - NSAIDs';
+	cdsStateInit.drugPair = drugPair;
+
+	cdsStatePost = warfarinNsaids.runRule(cdsStateInit);
+	
+	cdsStateL.push(cdsStatePost);
+    }
+        
+    if (!cdsStateL.length) {
+	return [];
+    }
+    return cdsStateL;
+}
+
+function buildCards(cdsStateL, validResources) {
+    winston.log('info', 'buildCards entry');
+    
+    if (!cdsStateL.length) {
+	winston.log('error', 'no values in cdsStateL!');
+	return { cards: [] };
+    }
+    
+    if (!validResources.length) {
+	winston.log('error', 'no values in validResources!');
+	return { cards: [] };
+    }
+
+    winston.log('info', 'buildCards passed input variable tests');
+    const cards = [];
+    cdsStateL.forEach((cdsState) => {
+	const suggestedCard = getCardForCdsState(cdsState, validResources);
+	if (suggestedCard) {
+	    cards.push(suggestedCard);
+	}
+    });
+
+    if (!cards.length) {
+	return { cards: [] };
+    }
+    return { cards };
 }
 
 // CDS Service endpoint
 router.post('/', (request, response) => {
-    winston.log('info', 'a');
+    winston.log('info', 'Calling getValidContextResources');
     const validResources = getValidContextResources(request);
-    winston.log('info', 'b');
-    const cards = buildCards(validResources);
-    winston.log('info', 'c');
+
+    winston.log('info', 'Calling CDS',{validResources});
+    const cdsStateL = pddiCDS(validResources);
+    winston.log('info', 'cdsStateL', {cdsStateL});
+    
+    winston.log('info', 'Calling buildCards');
+    const cards = buildCards(cdsStateL, validResources);
+    winston.log('info', 'Sending response CDS Hooks cards');
     response.json(cards);
 });
 

@@ -1,0 +1,61 @@
+curl -0 -v -X POST http://localhost:3000/cds-services/pddi-cds-med-rx  -H 'Content-type: application/json' -d\
+'{
+  "hookInstance": "7b78d68a-e687-4643-97ac-8295bfa7f3ce",
+  "hook": "medication-prescribe",
+  "fhirServer": "https://api-v5-dstu2.hspconsortium.org/PDDICDSv2STU2/data",
+  "user": "Practitioner/SMART-1234",
+  "patient": "SMART-1288992",
+  "context": {
+    "patientId": "SMART-1288992",
+    "medications": [{
+      "resourceType": "MedicationOrder",
+      "dateWritten": "2018-06-06",
+      "status": "draft",
+      "patient": {
+        "reference": "Patient/SMART-1288992"
+      },
+      "dosageInstruction": [
+        {
+          "doseQuantity": {
+            "value": 1,
+            "system": "http://unitsofmeasure.org",
+            "code": "{pill}"
+          },
+          "timing": {
+            "repeat": {
+              "frequency": 1,
+              "period": 1,
+              "periodUnits": "d"
+            }
+          }
+        }
+      ],
+      "medicationCodeableConcept": {
+        "text": "Warfarin Sodium 1 MG Oral Tablet [Coumadin]",
+        "coding": [
+          {
+            "display": "Warfarin Sodium 1 MG Oral Tablet [Coumadin]",
+            "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            "code": "855290"
+          }
+        ]
+      },
+      "reasonCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "26929004",
+            "display": "Alzheimers disease"
+          }
+        ],
+        "text": "Alzheimers disease"
+      }
+    }]
+  },
+  "fhirAuthorization": {
+    "access_token": "eyJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0ODE2M2M1ZS04OGI1LTRjYjMtOTJkMy0yM2I4MDBjYWE5MjciLCJpc3MiOiJodHRwczpcL1wvYXV0aC5oc3Bjb25zb3J0aXVtLm9yZ1wvIiwiaWF0IjoxNTI4MzE2MDk0LCJqdGkiOiJiYjllMGZhNy0wM2Y5LTQ4YzAtOTdkZS1hMGY0MTMyNzAyOTgifQ.ZlTr1IbgGEnUh69qH3-VZNKAs8r7RvfeunVHN6UcTNuaC9zks1Mtv9uApUVo9C_Vgf8LNXZHYXBRYjTh3uA8EgjmEU-8HUpmr3UWswLjZMagdD1PxE9zn2KoiYc4UVnGqR9p6AG89c4caKlOqatDqs5Oq3DEOjao8qJjgpfqMkXCt1cY_4B3fIZj1PZaa8-V-VxgaZt8--ayJq5_y19NFj3dpJISCDIfXC13GAE3_kbSAruIc5Ns1Z6RTbBizAAi6X0OL-DFXo0yaJ3n7Qo8gSB8-2YQzVh29iATFfRgCiBS_JXG9ZAGV1VHCZPruQb69CEHwmeCIMxnQNvGtasNBA",
+    "token_type": "Bearer",
+    "scope": "patient/*.* user/*.* launch openid profile online_access",
+    "subject": "48163c5e-88b5-4cb3-92d3-23b800caa927"
+  }
+}'

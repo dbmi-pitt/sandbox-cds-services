@@ -13,5 +13,11 @@
     "title": "CMS Pricing Service",
     "description": "Determine if an authored prescription has a cheaper alternative to switch to and display pricing",
     "hook": "medication-prescribe"
+  },
+  {
+    "id": "pddi-cds-med-prescribe",
+    "title": "Potential drug-drug interaction decision support",
+    "description": "run decision support for contextualized potential drug-drug interactions at the time a medication prescription is being signed",
+    "hook": "medication-prescribe"
   }
 ]

@@ -71,8 +71,6 @@
 	"858342": "Diclofenac Potassium 25 MG Oral Capsule",
 	"857702": "Diclofenac Potassium 25 MG Oral Tablet",
 	"855942": "Diclofenac Potassium 50 MG Oral Tablet",
-	"855633": "Diclofenac Sodium 0.01 MG/MG Topical Gel",
-	"855642": "Diclofenac Sodium 0.03 MG/MG Topical Gel",
 	"1234493": "Diclofenac Sodium 100 MG Oral Capsule",
 	"857696": "Diclofenac Sodium 100 MG Rectal Suppository",
 	"857698": "Diclofenac Sodium 12.5 MG Rectal Suppository",
@@ -177,7 +175,10 @@
 	"198296": "Tolmetin 400 MG Oral Capsule",
 	"198297": "Tolmetin 600 MG Oral Tablet",
 	"349319": "valdecoxib 10 MG Oral Tablet",
-	"349321": "valdecoxib 20 MG Oral Tablet"
+	"349321": "valdecoxib 20 MG Oral Tablet",
+      "1234735": "diclofenac epolamine 0.0129 MG/MG Topical Gel",
+      "855633": "Diclofenac Sodium 0.01 MG/MG Topical Gel",
+      "855642": "Diclofenac Sodium 0.03 MG/MG Topical Gel"
     },
     "topical diclofenac": {
 	"1234735": "diclofenac epolamine 0.0129 MG/MG Topical Gel",
@@ -312,5 +313,31 @@
 	"198222": "Spironolactone 100 MG Oral Tablet",
 	"313096": "Spironolactone 25 MG Oral Tablet",
 	"198223": "Spironolactone 50 MG Oral Tablet"
-    }
+    },
+  "UGIB": {
+    "12847006": "Acute duodenal ulcer with hemorrhage",
+    "86895006": "Acute duodenal ulcer with hemorrhage AND perforation",
+    "89748001": "Acute gastric ulcer with hemorrhage",
+    "48974009": "Acute gastric ulcer with hemorrhage AND perforation",
+    "63954007": "Acute gastrojejunal ulcer with hemorrhage",
+    "81387001": "Acute gastrojejunal ulcer with hemorrhage AND perforation",
+    "2367005": "Acute hemorrhagic gastritis",
+    "12274003": "Acute peptic ulcer with hemorrhage",
+    "47064007": "Acute peptic ulcer with hemorrhage AND with perforation but without obstruction",
+    "235853006": "Angiodysplasia of intestine",
+    "84568007": "Atrophic gastritis",
+    "81142005": "Chronic duodenal ulcer with hemorrhage AND with perforation but without obstruction",
+    "62341002": "Chronic duodenal ulcer with hemorrhage but without obstruction",
+    "74341002": "Chronic gastric ulcer with hemorrhage AND with perforation but without obstruction",
+    "76078009": "Chronic gastric ulcer with hemorrhage but without obstruction",
+    "62838000": "Chronic gastrojejunal ulcer with hemorrhage",
+    "46523000": "Chronic gastrojejunal ulcer with hemorrhage AND with perforation but without obstruction",
+    "55746001": "Chronic peptic ulcer with hemorrhage AND with perforation but without obstruction",
+    "81518000": "Chronic peptic ulcer with hemorrhage but without obstruction",
+    "109558001": "Dieulafoy's vascular malformation",
+    "61401005": "Gastric hemorrhage",
+    "196731005": "Gastroduodenitis",
+    "74474003": "Gastrointestinal hemorrhage",
+    "95531001": "Hemorrhagic duodenitis"
+  }
 }

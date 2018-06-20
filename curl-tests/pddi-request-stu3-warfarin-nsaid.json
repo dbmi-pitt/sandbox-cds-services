@@ -1,0 +1,93 @@
+{
+  "hookInstance": "3ed4676d-3951-4439-9f36-bb630b05bf82",
+  "hook": "medication-prescribe",
+  "fhirServer": "https://api-v5-stu3.hspconsortium.org/PDDICDSHOOKS/data",
+  "user": "Practitioner/SMART-1234",
+  "patient": "16802",
+  "context": {
+    "patientId": "16802",
+    "medications": {
+          "resource": {
+            "resourceType": "MedicationRequest",
+            "authoredOn": "2018-06-16",
+            "status": "draft",
+            "subject": {
+              "reference": "Patient/16802"
+            },
+            "dosageInstruction": [
+              {
+                "doseQuantity": {
+                  "value": 1,
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{pill}"
+                },
+                "timing": {
+                  "repeat": {
+                    "frequency": 2,
+                    "period": 1,
+                    "periodUnit": "d",
+                    "boundsPeriod": {
+                      "start": "2018-06-16",
+                      "end": "2018-07-14"
+                    }
+                  }
+                }
+              }
+            ],
+            "medicationCodeableConcept": {
+              "text": "Diclofenac Sodium 75 MG Delayed Release Oral Tablet",
+              "coding": [
+                {
+                  "display": "Diclofenac Sodium 75 MG Delayed Release Oral Tablet",
+                  "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                  "code": "855926"
+                }
+              ]
+            }
+          },
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "authoredOn": "2018-06-16",
+        "status": "draft",
+        "subject": {
+          "reference": "Patient/16802"
+        },
+        "dosageInstruction": [
+          {
+            "doseQuantity": {
+              "value": 1,
+              "system": "http://unitsofmeasure.org",
+              "code": "{pill}"
+            },
+            "timing": {
+              "repeat": {
+                "frequency": 2,
+                "period": 1,
+                "periodUnit": "d",
+                "boundsPeriod": {
+                  "start": "2018-06-16",
+                  "end": "2018-07-14"
+                }
+              }
+            }
+          }
+        ],
+        "medicationCodeableConcept": {
+          "text": "Diclofenac Sodium 75 MG Delayed Release Oral Tablet",
+          "coding": [
+            {
+              "display": "Diclofenac Sodium 75 MG Delayed Release Oral Tablet",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+              "code": "855926"
+            }
+          ]
+        }
+    }
+  },
+  "fhirAuthorization": {
+    "access_token": "eyJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0ODE2M2M1ZS04OGI1LTRjYjMtOTJkMy0yM2I4MDBjYWE5MjciLCJpc3MiOiJodHRwczpcL1wvYXV0aC5oc3Bjb25zb3J0aXVtLm9yZ1wvIiwiaWF0IjoxNTI5MTc2Mzc0LCJqdGkiOiJkMTMxZTJiZC1hODExLTRmMjMtOThkMS0xZDcwOTkxZTZlNDQifQ.i2slJwvuvO4H0Nb00u3tyut9jjV_CENSdQiqBMHM4lPezxr0qI3srIiWAHS40-kDQW4wFejRO3wrosyNKRMd6P9wOjue-B7zYiljgij9npkCmNhXWlbn0OqhhG7IDm-1RGm27NWfEjR_vlx0vhazcC6cWvDIhb11RJdnyZaYHzShE__17jOmqRlvOEFASa8UuCDRiruni5e8EO8gSTYg0P12M7M473TQjNRORvrFYaLaFrOKqFEPNT9wb0VxNq-uCpU-3ij9P_rG4ftrmxpHHIyTV2xWxleEJ4XlRFeXjJsa2MNLYRBYZcIl0we_fMbdVo79DM9qEVc-5EvWz21BRw",
+    "token_type": "Bearer",
+    "scope": "patient/*.* user/*.* launch openid profile online_access",
+    "subject": "48163c5e-88b5-4cb3-92d3-23b800caa927"
+  }
+}

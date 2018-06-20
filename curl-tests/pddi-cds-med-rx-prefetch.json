@@ -1,0 +1,93 @@
+{
+  "hookInstance": "d1577c69-dfbe-44ad-ba6d-3e05e953b2ea",
+  "fhirServer": "http://fhir.example.com",
+  "hook": "medication-prescribe",
+  "user": "Practitioner/example",
+  "context": {
+    "medications": [
+      {
+        "resourceType": "MedicationOrder",
+        "id": "medrx001",
+        "dateWritten": "2017-05-05",
+        "status": "draft",
+        "patient": {
+          "reference": "Patient/example"
+        },
+        "medicationCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+              "code": "855288",
+              "display": "Acetaminophen 325 MG / Hydrocodone Bitartrate 10 MG Oral Tablet"
+            }
+          ]
+        },
+        "dosageInstruction": [
+          {
+            "text": "Take 1 tablet Oral every 4 hours as needed",
+            "timing": {
+              "repeat": {
+                "frequency": 6,
+                "frequencyMax": 6,
+                "period": 1,
+                "unit": "d"
+              }
+            },
+            "asNeededBoolean": true,
+            "doseQuantity": {
+              "value": 10,
+              "unit": "mg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg"
+            }
+          }
+        ]
+      }
+    ],
+    "patientId": "1288992"
+  },
+  "prefetch": {
+    "medication": {
+      "response": {
+        "status": "200 OK"
+      },
+      "resource": {
+        "resourceType": "MedicationOrder",
+        "id": "medrx002",
+        "dateWritten": "2017-04-25",
+        "status": "active",
+        "patient": {
+          "reference": "Patient/example"
+        },
+        "medicationCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+              "code": "855633",
+              "display": "Oxycodone Hydrochloride 5 MG Oral Tablet"
+            }
+          ]
+        },
+        "dosageInstruction": [
+          {
+            "text": "Take 1 tablet by mouth every 4 hours as needed for pain.",
+            "timing": {
+              "repeat": {
+                "frequency": 6,
+                "period": 1,
+                "periodUnits": "d"
+              }
+            },
+            "asNeededBoolean": true,
+            "doseQuantity": {
+              "value": 5,
+              "unit": "mg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

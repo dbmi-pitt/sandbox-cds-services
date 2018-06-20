@@ -1,0 +1,127 @@
+{
+  "hookInstance": "7b78d68a-e687-4643-97ac-8295bfa7f3ce",
+  "hook": "medication-prescribe",
+  "fhirServer": "https://api-v5-dstu2.hspconsortium.org/PDDICDSv2STU2/data",
+  "user": "Practitioner/SMART-1234",
+  "patient": "SMART-1288992",
+  "context": {
+    "patientId": "SMART-1288992",
+    "medications": [
+      {
+        "resourceType": "MedicationOrder",
+        "dateWritten": "2018-06-11",
+        "status": "draft",
+        "patient": {
+          "reference": "Patient/SMART-1288992"
+        },
+        "dosageInstruction": [
+          {
+            "doseQuantity": {
+              "value": 1,
+              "system": "http://unitsofmeasure.org",
+              "code": "{TODO}"
+            },
+            "timing": {
+              "repeat": {
+                "frequency": 1,
+                "period": 30,
+                "periodUnits": "d"
+              }
+            }
+          }
+        ],
+        "medicationCodeableConcept": {
+          "text": "Indomethacin 50 MG Oral Capsule",
+          "coding": [
+            {
+              "display": "Indomethacin 50 MG Oral Capsule",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+              "code": "197818"
+            }
+          ]
+        },
+        "reasonCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "396275006",
+              "display": "Osteoarthritis"
+            }
+          ],
+          "text": "Osteoarthritis"
+        }
+      },
+      {
+        "resourceType": "MedicationOrder",
+        "dateWritten": "2018-06-06",
+        "status": "draft",
+        "patient": {
+          "reference": "Patient/SMART-1288992"
+        },
+        "dosageInstruction": [
+          {
+            "doseQuantity": {
+              "value": 1,
+              "system": "http://unitsofmeasure.org",
+              "code": "{pill}"
+            },
+            "timing": {
+              "repeat": {
+                "frequency": 1,
+                "period": 30,
+                "periodUnits": "d"
+              }
+            }
+          }
+        ],
+        "medicationCodeableConcept": {
+          "text": "Warfarin Sodium 1 MG Oral Tablet [Coumadin]",
+          "coding": [
+            {
+              "display": "Warfarin Sodium 1 MG Oral Tablet [Coumadin]",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+              "code": "855290"
+            }
+          ]
+        }
+
+      },
+      {
+        "resourceType": "MedicationOrder",
+        "dateWritten": "2018-06-06",
+        "status": "draft",
+        "patient": {
+          "reference": "Patient/SMART-1288992"
+        },
+        "dosageInstruction": [
+          {
+            "doseQuantity": {
+              "value": 1,
+              "system": "http://unitsofmeasure.org",
+              "code": "{pill}"
+            },
+            "timing": {
+              "repeat": {
+                "frequency": 1,
+                "period": 30,
+                "periodUnits": "d"
+              }
+            }
+          }
+        ],
+        "medicationCodeableConcept": {
+          "text": "Misoprostol 0.2 MG Oral Tablet",
+          "coding": [
+            {
+              "display": "Misoprostol 0.2 MG Oral Tablet",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+              "code": "317128"
+            }
+          ]
+        }
+
+      }
+    ]
+  }
+
+}

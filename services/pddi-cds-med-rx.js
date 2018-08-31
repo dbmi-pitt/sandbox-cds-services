@@ -5,6 +5,7 @@ const winston = require('winston');
 
 // libs provided by this service
 const warfarinNsaids = require('../lib/pddi-cds/warfarin-nsaids-CDS');
+const digoxinCyclosporines = require('../lib/pddi-cds/digoxin-cyclosporine-CDS');
 
 const pddiValueSets = require('../lib/pddi-cds-valuesets.json');
 

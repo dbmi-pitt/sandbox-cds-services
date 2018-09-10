@@ -341,12 +341,12 @@
     "95531001": "Hemorrhagic duodenitis"
   },
   "cyclosporine": {
-
+  	"328160": "Cyclosporine 100 MG Oral Capsule"
   },
   "digoxin": {
-
+  	"237165": "Digoxin 0.05 MG Oral Capsule"
   },
   "diuretics": {
-  	
+  	"251308" : "Furosemide 1 MG/ML Oral Solution"
   }
 }

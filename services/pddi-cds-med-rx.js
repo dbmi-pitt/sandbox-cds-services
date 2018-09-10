@@ -152,15 +152,26 @@ function pddiCDS(resources) {
   };
 
 
-  drugPair = warfarinNsaids.ruleAppliesToContext(resources);
-  if (drugPair) {
+  drugPairWarfarinNsaids = warfarinNsaids.ruleAppliesToContext(resources);
+  if (drugPairWarfarinNsaids) {
     cdsStateInit.rule = 'Warfarin - NSAIDs';
-    cdsStateInit.drugPair = drugPair;
+    cdsStateInit.drugPair = drugPairWarfarinNsaids;
 
     cdsStatePost = warfarinNsaids.runRule(cdsStateInit);
 
     cdsStateL.push(cdsStatePost);
   }
+
+  drugPairDigoxinCyclosporine = digoxinCyclosporines.ruleAppliesToContext(resources);
+  if (digoxinCyclosporines) {
+    cdsStateInit.rule = 'Digoxin - Cyclosporines';
+    cdsStateInit.drugPair = drugPairDigoxinCyclosporine;
+
+    cdsStatePost = digoxinCyclosporines.runRule(cdsStateInit);
+
+    cdsStateL.push(cdsStatePost);
+  }
+  // TODO make another JS file with logic between running warfarin-nsaids and/or digoxin-cyclosporines? -- refactor ruleAppliesToContext function
 
   if (!cdsStateL.length) {
     return [];

@@ -4,7 +4,7 @@ const router = express.Router();
 const serviceDefinitions = require('./service-definitions');
 const patientGreetingService = require('../services/patient-greeting');
 const cmsPriceCheck = require('../services/cms-price-check');
-const pddiCdsMedRx = require('../services/pddi-cds-med-rx');
+const pddiCdsMedRx = require('../services/pddi-cds-med-prescribe');
 
 // Discovery Endpoint
 router.get('/', (request, response) => {
@@ -17,6 +17,6 @@ router.get('/', (request, response) => {
 // Routes to CDS Services
 router.use('/patient-greeting', patientGreetingService);
 router.use('/cms-price-check', cmsPriceCheck);
-router.use('/pddi-cds-med-rx', pddiCdsMedRx);
+router.use('/pddi-cds-med-prescribe', pddiCdsMedRx);
 
 module.exports = router;

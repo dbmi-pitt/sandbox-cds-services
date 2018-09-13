@@ -163,7 +163,7 @@ function pddiCDS(resources) {
   }
 
   drugPairDigoxinCyclosporine = digoxinCyclosporines.ruleAppliesToContext(resources);
-  if (digoxinCyclosporines) {
+  if (drugPairDigoxinCyclosporine) {
     cdsStateInit.rule = 'Digoxin - Cyclosporines';
     cdsStateInit.drugPair = drugPairDigoxinCyclosporine;
 

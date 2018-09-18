@@ -18,6 +18,14 @@
     "id": "pddi-cds-med-prescribe",
     "title": "Potential drug-drug interaction decision support",
     "description": "run decision support for contextualized potential drug-drug interactions at the time a medication prescription is being signed",
-    "hook": "medication-prescribe"
+    "hook": "medication-prescribe",
+    "prefetch": {
+        "item1": "Patient?_id={{context.patientId}}",
+        "item2": "MedicationRequest?patient={{context.patientId}}&authoredon=ge2018-05-12",
+        "item3": "MedicationAdministration?patient={{context.patientId}}&effective-time=ge2018-05-12",
+        "item4": "MedicationDispense?patient={{context.patientId}}&whenhandedover=ge2018-05-12",
+        "item5": "MedicationStatement?patient={{context.patientId}}&effective=ge2018-05-12",
+        "item6": "Observation?patient={{context.patientId}}&date=ge2018-07-21"
+    }
   }
 ]

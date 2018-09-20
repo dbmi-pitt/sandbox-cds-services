@@ -25,7 +25,8 @@
         "item3": "MedicationAdministration?patient={{context.patientId}}&effective-time=ge2018-05-12",
         "item4": "MedicationDispense?patient={{context.patientId}}&whenhandedover=ge2018-05-12",
         "item5": "MedicationStatement?patient={{context.patientId}}&effective=ge2018-05-12",
-        "item6": "Observation?patient={{context.patientId}}&date=ge2018-07-21"
+        "item6": "Observation?patient={{context.patientId}}&date=ge2018-07-21",
+        "item7": "Condition?patient={{context.patientId}}"
     }
   }
 ]

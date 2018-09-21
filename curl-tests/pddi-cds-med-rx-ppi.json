@@ -8,7 +8,7 @@
     "patientId": "SMART-1288992",
     "medications": [
       {
-        "resourceType": "MedicationRequest",
+        "resourceType": "MedicationOrder",
         "dateWritten": "2018-06-11",
         "status": "draft",
         "patient": {
@@ -87,7 +87,7 @@
 
       },
       {
-        "resourceType": "MedicationRequest",
+        "resourceType": "MedicationOrder",
         "dateWritten": "2018-06-06",
         "status": "draft",
         "patient": {

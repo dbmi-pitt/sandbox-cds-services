@@ -8,7 +8,7 @@
     "patientId": "16802",
     "medications": {
           "resource": {
-            "resourceType": "MedicationRequest",
+            "resourceType": "MedicationOrder",
             "authoredOn": "2018-06-16",
             "status": "draft",
             "subject": {
@@ -46,7 +46,7 @@
             }
           },
       "resource": {
-        "resourceType": "MedicationRequest",
+        "resourceType": "MedicationOrder",
         "authoredOn": "2018-06-16",
         "status": "draft",
         "subject": {

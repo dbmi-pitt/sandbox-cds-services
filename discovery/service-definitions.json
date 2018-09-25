@@ -21,7 +21,7 @@
     "hook": "medication-prescribe",
     "prefetch": {
         "item1": "Patient?_id={{context.patientId}}",
-        "item2": "MedicationOrder?patient={{context.patientId}}&authoredon=ge2018-05-12",
+        "item2": "MedicationOrder?patient={{context.patientId}}&datewritten=ge2018-05-12",
         "item3": "MedicationAdministration?patient={{context.patientId}}&effective-time=ge2018-05-12",
         "item4": "MedicationDispense?patient={{context.patientId}}&whenhandedover=ge2018-05-12",
         "item5": "MedicationStatement?patient={{context.patientId}}&effective=ge2018-05-12",

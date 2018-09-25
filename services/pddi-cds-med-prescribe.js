@@ -89,7 +89,7 @@ function getCardForCdsState(cdsState, validResources) {
       indicator: 'hard-stop',
     };
     card.suggestions = [{
-      label: `Use only if benefit outweighs risk. Evidence: ${cdsState.evidence}`,
+      label: `${cdsState.ruleBranchRecommendedAction}. Evidence: ${cdsState.evidence}`,
       actions: [{
         type: `${cdsState.ruleBranchActionType}`,
         description: `${cdsState.ruleBranchActionDescription}`,
@@ -97,7 +97,7 @@ function getCardForCdsState(cdsState, validResources) {
     }];
     return card;
   }
-  if (cdsState.ruleBranchRecommendedAction === 'Assess risk and take action if necessary') {
+  if (cdsState.ruleBranchRecommendedAction === 'Assess risk and take action if necessary' || cdsState.ruleBranchRecommendedAction === 'Consultation') {
     winston.log('info', 'creating warning card');
 
     const card = {
@@ -107,7 +107,7 @@ function getCardForCdsState(cdsState, validResources) {
       indicator: 'warning',
     };
     card.suggestions = [{
-      label: `Assess risk and take action if necessary. Evidence: ${cdsState.evidence}`,
+      label: `${cdsState.ruleBranchRecommendedAction}. Evidence: ${cdsState.evidence}`,
       actions: [{
         type: `${cdsState.ruleBranchActionType}`,
         description: `${cdsState.ruleBranchActionDescription}`,
@@ -124,7 +124,7 @@ function getCardForCdsState(cdsState, validResources) {
       indicator: 'info',
     };
     card.suggestions = [{
-      label: `No special precautions. Evidence: ${cdsState.evidence}`,
+      label: `${cdsState.ruleBranchRecommendedAction}. Evidence: ${cdsState.evidence}`,
     }];
   }
 

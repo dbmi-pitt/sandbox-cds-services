@@ -74,6 +74,40 @@
             }
           ]
         }
+      },
+      {
+        "resourceType": "MedicationOrder",
+        "dateWritten": "2018-06-09",
+        "status": "draft",
+        "patient": {
+          "reference": "Patient/SMART-1288992"
+        },
+        "dosageInstruction": [
+          {
+            "doseQuantity": {
+              "value": 1,
+              "system": "http://unitsofmeasure.org",
+              "code": "{pill}"
+            },
+            "timing": {
+              "repeat": {
+                "frequency": 1,
+                "period": 30,
+                "periodUnits": "d"
+              }
+            }
+          }
+        ],
+        "medicationCodeableConcept": {
+          "text": "Furosemide 1 MG/ML Oral Solution",
+          "coding": [
+            {
+              "display": "Furosemide 1 MG/ML Oral Solution",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+              "code": "251308"
+            }
+          ]
+        }
       }
     ]
   }

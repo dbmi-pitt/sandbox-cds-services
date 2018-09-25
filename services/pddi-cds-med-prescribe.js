@@ -90,6 +90,10 @@ function getCardForCdsState(cdsState, validResources) {
     };
     card.suggestions = [{
       label: `Use only if benefit outweighs risk. Evidence: ${cdsState.evidence}`,
+      actions: [{
+        type: `${cdsState.ruleBranchActionType}`,
+        description: `${cdsState.ruleBranchActionDescription}`,
+      }],
     }];
     return card;
   }
@@ -105,8 +109,8 @@ function getCardForCdsState(cdsState, validResources) {
     card.suggestions = [{
       label: `Assess risk and take action if necessary. Evidence: ${cdsState.evidence}`,
       actions: [{
-        type: 'create',
-        description: 'replace with APAP',
+        type: `${cdsState.ruleBranchActionType}`,
+        description: `${cdsState.ruleBranchActionDescription}`,
       }],
     }];
     return card;
@@ -141,6 +145,8 @@ function pddiCDS(resources) {
     drugPair: null,
     ruleBranch: null,
     ruleBranchRecommendedAction: null,
+    ruleBranchActionType: null,
+    ruleBranchActionDescription: null,
     evidence: null,
     mechanism: null,
     clinicalConsequences: null,

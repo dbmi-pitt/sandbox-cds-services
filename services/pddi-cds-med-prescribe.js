@@ -78,7 +78,14 @@ function getValidContextResources(request) {
 function getCardForCdsState(cdsState, validResources) {
   winston.log('info', 'getCardForCdsState entry');
   // TODO: process the validResources as needed to create actions
-
+  allSuggestions = [];
+  winston.log('info', cdsState.ruleBranchAction);
+  for (var i = 0; i < cdsState.ruleBranchAction.length; i++){
+    allSuggestions.push({
+      type: `${cdsState.ruleBranchAction[i].ruleBranchActionType}`,
+      description: `${cdsState.ruleBranchAction[i].ruleBranchActionDescription}`,
+    });
+  };
   // just a suggestion card?
   if (cdsState.ruleBranchRecommendedAction === 'Use only if benefit outweighs risk') {
     winston.log('info', 'creating hard-stop');
@@ -90,10 +97,7 @@ function getCardForCdsState(cdsState, validResources) {
     };
     card.suggestions = [{
       label: `${cdsState.ruleBranchRecommendedAction}. Evidence: ${cdsState.evidence}`,
-      actions: [{
-        type: `${cdsState.ruleBranchActionType}`,
-        description: `${cdsState.ruleBranchActionDescription}`,
-      }],
+      actions: allSuggestions
     }];
     return card;
   }
@@ -108,10 +112,7 @@ function getCardForCdsState(cdsState, validResources) {
     };
     card.suggestions = [{
       label: `${cdsState.ruleBranchRecommendedAction}. Evidence: ${cdsState.evidence}`,
-      actions: [{
-        type: `${cdsState.ruleBranchActionType}`,
-        description: `${cdsState.ruleBranchActionDescription}`,
-      }],
+      actions: allSuggestions
     }];
     return card;
   }
@@ -145,8 +146,10 @@ function pddiCDS(resources) {
     drugPair: null,
     ruleBranch: null,
     ruleBranchRecommendedAction: null,
-    ruleBranchActionType: null,
-    ruleBranchActionDescription: null,
+    ruleBranchAction: [{
+      ruleBranchActionType: null,
+      ruleBranchActionDescription: null
+    }], // initialize ruleBranchAction with one set of the tuples, since the card should still output that no action action is required/available if none are created.
     evidence: null,
     mechanism: null,
     clinicalConsequences: null,

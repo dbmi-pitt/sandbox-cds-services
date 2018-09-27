@@ -5418,5 +5418,39 @@
     "1944642":"Aciphex Granule Product",
     "1168435":"Aciphex Oral Product",
     "1168436":"Aciphex Pill"
+  },
+  "serum calcium": {
+    "17864-0":"Calcium.ionized [Mass/​volume] in Serum or Plasma by Ion-selective membrane electrode (ISE)",
+    "17861-6":"Calcium [Mass/volume] in Serum or Plasma",
+    "1994-3":"Calcium.ionized [Moles/volume] in Blood",
+    "1995-0":"Calcium.ionized [Moles/volume] in Serum or Plasma",
+    "29265-6":"Calcium [Moles/volume] corrected for albumin in Serum or Plasma"
+  },
+  "serum potassium": {
+    "75940-7":"Potassium [Mass/​volume] in Blood",
+    "12812-4":"Potassium [Moles/​volume] in Serum or Plasma --2nd specimen",
+    "12813-2":"Potassium [Moles/​volume] in Serum or Plasma --3rd specimen",
+    "22760-3":"Potassium [Mass/​volume] in Serum or Plasma",
+    "2823-3":"Potassium [Moles/​volume] in Serum or Plasma",
+    "2824-1":"Potassium [Moles/​volume] in Red Blood Cells",
+    "29349-8":"Potassium [Moles/​volume] in Serum or Plasma --post dialysis",
+    "32713-0":"Potassium [Moles/​volume] in Arterial blood",
+    "39789-3":"Potassium [Moles/​volume] in Venous blood",
+    "39790-1":"Potassium [Moles/​volume] in Capillary blood",
+    "41656-0":"Potassium [Moles/​volume] in Mixed venous blood",
+    "51618-7":"Potassium [Moles/​volume] in Serum or Plasma --pre dialysis",
+    "6298-4":"Potassium [Moles/​volume] in Blood"
+  },
+  "serum magnesium": {
+    "19123-9":"Magnesium [Mass/volume] in Serum or Plasma",
+    "2597-3":"Magnesium [Moles/volume] in Red Blood Cells",
+    "2601-3":"Magnesium [Moles/volume] in Serum or Plasma"
+  },
+  "serum creatinine": {
+    "2160-0":"Creatinine [Mass/​volume] in Serum or Plasma",
+    "33914-3":"Glomerular filtration rate/​1.73 sq M.predicted [Volume Rate/​Area] in Serum or Plasma by Creatinine-based formula (MDRD)",
+    "50044-7":"Glomerular filtration rate/​1.73 sq M predicted among females [Volume Rate/​Area] in Serum, Plasma or Blood by Creatinine-based formula (MDRD)",
+    "48642-3":"Glomerular filtration rate/​1.73 sq M predicted among non-blacks [Volume Rate/​Area] in Serum, Plasma or Blood by Creatinine-based formula (MDRD)",
+    "48643-1":"Glomerular filtration rate/​1.73 sq M predicted among blacks [Volume Rate/​Area] in Serum, Plasma or Blood by Creatinine-based formula (MDRD)"
   }
 }

@@ -9,10 +9,6 @@ const digoxinCyclosporines = require('../lib/pddi-cds/digoxin-cyclosporine-CDS')
 
 const pddiValueSets = require('../lib/pddi-cds-valuesets.json');
 
-// deprecated - TODO remove related code
-const priceTable = require('../lib/rxnorm-prices.json');
-
-
 const router = express.Router();
 
 function getValidCoding(codings, system) {
@@ -115,6 +111,7 @@ function getCardForCdsState(cdsState, validResources) {
     allSuggestions.push({
       type: `${cdsState.ruleBranchAction[i].ruleBranchActionType}`,
       description: `${cdsState.ruleBranchAction[i].ruleBranchActionDescription}`,
+      resource: `${cdsState.ruleBranchAction[i].ruleBranchActionResource}`
     });
   };
   // just a suggestion card?
@@ -179,7 +176,8 @@ function pddiCDS(resources) {
     ruleBranchRecommendedAction: null,
     ruleBranchAction: [{
       ruleBranchActionType: null,
-      ruleBranchActionDescription: null
+      ruleBranchActionDescription: null,
+      ruleBranchActionResource: null
     }], // initialize ruleBranchAction with one set of the tuples, since the card should still output that no action action is required/available if none are created.
     evidence: null,
     mechanism: null,

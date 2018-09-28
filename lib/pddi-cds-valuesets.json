@@ -5452,5 +5452,9 @@
     "50044-7":"Glomerular filtration rate/​1.73 sq M predicted among females [Volume Rate/​Area] in Serum, Plasma or Blood by Creatinine-based formula (MDRD)",
     "48642-3":"Glomerular filtration rate/​1.73 sq M predicted among non-blacks [Volume Rate/​Area] in Serum, Plasma or Blood by Creatinine-based formula (MDRD)",
     "48643-1":"Glomerular filtration rate/​1.73 sq M predicted among blacks [Volume Rate/​Area] in Serum, Plasma or Blood by Creatinine-based formula (MDRD)"
+  },
+  "digoxin concentration": {
+    "10535-3":"Digoxin [Mass/​volume] in Serum or Plasma",
+    "3563-4":"Digoxin>12 hours post dose [Mass/​volume] in Serum or Plasma"
   }
 }

@@ -20,16 +20,24 @@ function getValidCoding(codings, system) {
   codings.forEach((coding) => {
     if (coding.code && coding.system === system) {
       validCoding = coding;
-    }
+    } 
   });
   return validCoding;
 }
 
-function getValidCodingFromConcept(medicationCodeableConcept) {
+function getValidMedCodingFromConcept(medicationCodeableConcept) {
   let coding = null;
   if (medicationCodeableConcept && medicationCodeableConcept.coding) {
     coding = getValidCoding(medicationCodeableConcept.coding, 'http://www.nlm.nih.gov/research/umls/rxnorm');
-  }
+  } 
+  return coding;
+}
+
+function getValidObsCodingFromConcept(observationCodeableConcept) {
+  let coding = null;
+  if (observationCodeableConcept && observationCodeableConcept.coding) {
+    coding = getValidCoding(observationCodeableConcept.coding, 'http://loinc.org');
+  } // TODO validate observation coding 
   return coding;
 }
 
@@ -43,12 +51,23 @@ function getValidResource(resource, context) {
     if (resource.patient && resource.patient.reference === `Patient/${context.patientId}`) {
       const { medicationCodeableConcept } = resource;
 
-      winston.log('info', 'getValidResource innerblock', { medicationCodeableConcept });
+      winston.log('info', 'getValidResource innerblock - medication', { medicationCodeableConcept });
 
-      coding = getValidCodingFromConcept(medicationCodeableConcept);
+      coding = getValidMedCodingFromConcept(medicationCodeableConcept);
+    } else {
+      winston.log('error', 'getValidResource - resource.patient.reference does not equal Patient/${context.patientId}');
     }
-    winston.log('error', 'getValidResource - resource.patient.reference does not equal Patient/${context.patientId}');
-  }
+  } else if (resource.resourceType === 'Observation') {
+    if (resource.patient && resource.patient.reference === `Patient/${context.patientId}`) {
+      const { code } = resource;
+
+      winston.log('info', 'getValidResource innerblock - observation', { code });
+
+      coding = getValidObsCodingFromConcept(code);
+    } else {
+      winston.log('error', 'getValidResource - resource.patient.reference does not equal Patient/${context.patientId}');
+    }
+  }// TODO validate observation coding 
   return coding;
 }
 
@@ -64,6 +83,18 @@ function getValidContextResources(request) {
     winston.log('info', 'getValidContextResources medResources', { medResources });
 
     medResources.forEach((resource) => {
+      const isValidResource = getValidResource(resource, context);
+      if (isValidResource) {
+        resources.push(resource);
+      }
+    });
+  }
+  if (context && context.patientId && context.observations) {
+    const obsResources = context.observations;
+
+    winston.log('info', 'getValidContextResources obsResources', { obsResources });
+
+    obsResources.forEach((resource) => {
       const isValidResource = getValidResource(resource, context);
       if (isValidResource) {
         resources.push(resource);
@@ -143,7 +174,7 @@ function pddiCDS(resources) {
 
   cdsStateInit = {
     rule: null,
-    drugPair: null,
+    drugPair: null, // technically not just drugs, can include lab tests
     ruleBranch: null,
     ruleBranchRecommendedAction: null,
     ruleBranchAction: [{

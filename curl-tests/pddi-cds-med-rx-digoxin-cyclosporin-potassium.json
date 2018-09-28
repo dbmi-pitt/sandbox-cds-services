@@ -90,7 +90,7 @@
             }
           ]
         },
-        "subject" : {
+        "patient" : {
           "reference" : "Patient/SMART-1288992"
         },
         "issued" : "2018-08-04T14:34:00+01:00",

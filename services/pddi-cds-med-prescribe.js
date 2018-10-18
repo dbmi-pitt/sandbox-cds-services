@@ -63,14 +63,23 @@ function getValidResource(resource, context) {
     } else {
       winston.log('error', 'getValidResource - resource.patient.reference does not equal Patient/${context.patientId}');
     }
-  }// TODO validate observation coding 
+  } else if (resource.resourceType === 'MedicationStatement') {
+    if (resource.patient && resource.patient.reference === `Patient/${context.patientId}`) {
+      const { medicationCodeableConcept } = resource;
+
+      winston.log('info', 'getValidResource innerblock - medication', { medicationCodeableConcept });
+
+      coding = getValidMedCodingFromConcept(medicationCodeableConcept);
+    }
+  }
+  // TODO MedicationStatement resource type for prefetch
   return coding;
 }
 
 function getValidContextResources(request) {
   const resources = [];
   const { context } = request.body;
-
+  winston.log('info', request.body);
   winston.log('info', 'getValidContextResources entry');
 
   if (context && context.patientId && context.medications) {

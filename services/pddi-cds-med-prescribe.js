@@ -64,22 +64,22 @@ function getValidResource(resource, context) {
       winston.log('error', 'getValidResource - resource.patient.reference does not equal Patient/${context.patientId}');
     }
   } else if (resource.resourceType === 'MedicationStatement') {
-    if (resource.patient && resource.patient.reference === `Patient/${context.patientId}`) {
+    if (resource.subject && resource.subject.reference === `Patient/${context.patientId}`) {
       const { medicationCodeableConcept } = resource;
 
       winston.log('info', 'getValidResource innerblock - medication', { medicationCodeableConcept });
 
       coding = getValidMedCodingFromConcept(medicationCodeableConcept);
+    } else {
+      winston.log('error', 'getValidResource - resource.patient.reference does not equal Patient/${context.patientId}');
     }
   }
-  // TODO MedicationStatement resource type for prefetch
   return coding;
 }
 
 function getValidContextResources(request) {
   const resources = [];
-  const { context } = request.body;
-  winston.log('info', request.body);
+  const { context , prefetch } = request.body;
   winston.log('info', 'getValidContextResources entry');
 
   if (context && context.patientId && context.medications) {
@@ -105,6 +105,19 @@ function getValidContextResources(request) {
         resources.push(resource);
       }
     });
+  }
+  if (prefetch && prefetch.item5) {
+    const medStatementResources = prefetch.item5.entry;
+
+    winston.log('info', 'prefetch item5', { medStatementResources });
+
+    medStatementResources.forEach((resource) =>{
+      const isValidResource = getValidResource(resource, context);
+      if (isValidResource) {
+        resources.push(resource);
+      }
+    })
+
   }
 
   winston.log('info', 'getValidContextResources exit', { resources });

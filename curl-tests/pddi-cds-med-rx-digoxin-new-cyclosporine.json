@@ -45,49 +45,49 @@
   },
   "prefetch": {
     "item1": {
-      "response": {
-        "status": "200 OK"
-      },
-      "resource": {
-        "resourceType": "Bundle",
-        "entry": [
-          {
-            "resourceType": "MedicationStatement",
-            "dateAsserted": "Today() - 90 days",
-            "status": "draft",
-            "subject": {
-              "reference": "Patient/SMART-1288992"
-            },
-            "taken": "y",
-            "dosage": [
-              {
-                "doseQuantity": {
-                  "value": 1,
-                  "system": "http://unitsofmeasure.org",
-                  "code": "{pill}"
-                },
-                "timing": {
-                  "repeat": {
-                    "frequency": 1,
-                    "period": 30,
-                    "periodUnits": "d"
-                  }
+      "resourceType": "Patient",
+      "gender": "female",
+      "birthDate": "1942-07-05"
+    },
+    "item5": {
+      "resourceType": "Bundle",
+      "entry": [
+        {
+          "resourceType": "MedicationStatement",
+          "dateAsserted": "Today() - 90 days",
+          "status": "draft",
+          "subject": {
+            "reference": "Patient/SMART-1288992"
+          },
+          "taken": "y",
+          "dosage": [
+            {
+              "doseQuantity": {
+                "value": 1,
+                "system": "http://unitsofmeasure.org",
+                "code": "{pill}"
+              },
+              "timing": {
+                "repeat": {
+                  "frequency": 1,
+                  "period": 30,
+                  "periodUnits": "d"
                 }
               }
-            ],
-            "medicationCodeableConcept": {
-              "text": "Digoxin 0.05 MG Oral Capsule",
-              "coding": [
-                {
-                  "display": "Digoxin 0.05 MG Oral Capsule",
-                  "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
-                  "code": "237165"
-                }
-              ]
             }
+          ],
+          "medicationCodeableConcept": {
+            "text": "Digoxin 0.05 MG Oral Capsule",
+            "coding": [
+              {
+                "display": "Digoxin 0.05 MG Oral Capsule",
+                "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                "code": "237165"
+              }
+            ]
           }
-        ]
-      }
+        }
+      ]
     }
   }
 }
